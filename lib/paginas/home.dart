@@ -18,7 +18,6 @@ class Home extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner de boas-vindas
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(24),
@@ -43,7 +42,6 @@ class Home extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // Resumo de hábitos do dia
             Text(
               "Resumo do Dia",
               style: TextStyle(
@@ -63,7 +61,6 @@ class Home extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            // Ações principais como botões maiores
             Text(
               "Ações",
               style: TextStyle(
@@ -118,7 +115,7 @@ class Home extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple.shade300, // tom mais suave
+                    backgroundColor: Colors.purple.shade300, 
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),

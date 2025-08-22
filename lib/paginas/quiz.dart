@@ -4,7 +4,7 @@ import '../componentes/botao_habito.dart';
 
 class Habito {
   String pergunta;
-  bool? concluido; // null = nada selecionado, true = sim, false = não
+  bool? concluido;
 
   Habito({required this.pergunta, this.concluido});
 
