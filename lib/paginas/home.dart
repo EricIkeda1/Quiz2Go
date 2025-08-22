@@ -7,67 +7,124 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text("Diário de Hábitos"),
         centerTitle: true,
         backgroundColor: Colors.teal[400],
       ),
-      backgroundColor: Colors.grey[100],
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
-            Text(
-              "Bem-vindo ao seu Diário de Hábitos!",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.teal[700],
+            // Banner de boas-vindas
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.teal.shade400, Colors.teal.shade700],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Text(
+                "Bem-vindo ao seu Diário de Hábitos!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
+
             const SizedBox(height: 30),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 1,
-                childAspectRatio: 3.5,
-                mainAxisSpacing: 16,
-                children: [
-                  _buildCard(
-                    context,
-                    icon: Icons.quiz,
-                    title: "Começar Quiz",
-                    description: "Responda perguntas sobre seus hábitos",
-                    color: Colors.teal,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Quiz()),
-                      );
-                    },
+
+            // Resumo de hábitos do dia
+            Text(
+              "Resumo do Dia",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal[700]),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildProgressCircle("Hábito 1", 0.7, Colors.teal),
+                _buildProgressCircle("Hábito 2", 0.4, Colors.orange),
+                _buildProgressCircle("Hábito 3", 0.9, Colors.purple),
+              ],
+            ),
+
+            const SizedBox(height: 30),
+
+            // Ações principais como botões maiores
+            Text(
+              "Ações",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal[700]),
+            ),
+            const SizedBox(height: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Quiz()),
+                    );
+                  },
+                  icon: const Icon(Icons.quiz, size: 28),
+                  label: const Text(
+                    "Começar Quiz",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  _buildCard(
-                    context,
-                    icon: Icons.add,
-                    title: "Adicionar Hábito",
-                    description: "Inclua novos hábitos para acompanhar",
-                    color: Colors.orange,
-                    onTap: () {
-                    },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
                   ),
-                  _buildCard(
-                    context,
-                    icon: Icons.bar_chart,
-                    title: "Ver Estatísticas",
-                    description: "Acompanhe seu progresso diário",
-                    color: Colors.purple,
-                    onTap: () {
-                    },
+                ),
+                const SizedBox(height: 15),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add, size: 28),
+                  label: const Text(
+                    "Adicionar Hábito",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                ],
-              ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.bar_chart, size: 28),
+                  label: const Text(
+                    "Ver Estatísticas",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple.shade300, // tom mais suave
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -75,46 +132,29 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context,
-      {required IconData icon,
-      required String title,
-      required String description,
-      required Color color,
-      required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        elevation: 5,
-        color: color.withOpacity(0.8),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Icon(icon, size: 40, color: Colors.white),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(title,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                    const SizedBox(height: 5),
-                    Text(description,
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.white70)),
-                  ],
-                ),
+  Widget _buildProgressCircle(String title, double progress, Color color) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            SizedBox(
+              width: 70,
+              height: 70,
+              child: CircularProgressIndicator(
+                value: progress,
+                strokeWidth: 6,
+                color: color,
+                backgroundColor: color.withOpacity(0.2),
               ),
-              const Icon(Icons.arrow_forward_ios, color: Colors.white),
-            ],
-          ),
+            ),
+            Text("${(progress * 100).toInt()}%",
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+          ],
         ),
-      ),
+        const SizedBox(height: 8),
+        Text(title),
+      ],
     );
   }
 }
