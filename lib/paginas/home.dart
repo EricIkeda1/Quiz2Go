@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz.dart';
+import 'adicionar_habito.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -93,7 +94,13 @@ class Home extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AdicionarHabito()),
+                    );
+                  },
                   icon: const Icon(Icons.add, size: 28),
                   label: const Text(
                     "Adicionar Hábito",
@@ -115,7 +122,7 @@ class Home extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple.shade300, 
+                    backgroundColor: Colors.purple.shade300,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../modelos/habito.dart';
 import '../componentes/botao_habito.dart';
 
 class Habito {
@@ -14,19 +13,33 @@ class Habito {
 }
 
 class Quiz extends StatefulWidget {
-  const Quiz({super.key});
+  final String? habitoAdicional;
+
+  const Quiz({super.key, this.habitoAdicional});
 
   @override
   State<Quiz> createState() => _QuizState();
 }
 
 class _QuizState extends State<Quiz> {
-  final List<Habito> _habitos = [
-    Habito(pergunta: "Você bebeu água hoje?"),
-    Habito(pergunta: "Você se exercitou hoje?"),
-    Habito(pergunta: "Você estudou 1h hoje?"),
-    Habito(pergunta: "Você está vivo por enquanto?"),
-  ];
+  late List<Habito> _habitos;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _habitos = [
+      Habito(pergunta: "Você bebeu água hoje?"),
+      Habito(pergunta: "Você se exercitou hoje?"),
+      Habito(pergunta: "Você estudou 1h hoje?"),
+      Habito(pergunta: "Você está vivo por enquanto?"),
+    ];
+
+    if (widget.habitoAdicional != null &&
+        widget.habitoAdicional!.trim().isNotEmpty) {
+      _habitos.add(Habito(pergunta: widget.habitoAdicional!));
+    }
+  }
 
   void _marcarHabito(int index, bool valor) {
     setState(() {

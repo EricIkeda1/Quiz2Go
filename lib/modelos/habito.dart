@@ -1,10 +1,6 @@
 class Habito {
-  String pergunta;
-  bool concluido;
+  String nome;
+  String descricao;
 
-  Habito({required this.pergunta, this.concluido = false});
-
-  void marcar(bool valor) {
-    concluido = valor;
-  }
+  Habito({required this.nome, required this.descricao});
 }
