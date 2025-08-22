@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../modelos/habito.dart';
 import '../componentes/campo_habito.dart';
 import '../componentes/botao_habito.dart';
 import 'quiz.dart';
@@ -13,10 +12,17 @@ class AdicionarHabito extends StatefulWidget {
 
 class _AdicionarHabitoState extends State<AdicionarHabito> {
   final TextEditingController nomeController = TextEditingController();
-  final TextEditingController descricaoController = TextEditingController();
 
   void salvarHabito() {
-    if (nomeController.text.isEmpty) return;
+    if (nomeController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Digite um nome para o hábito!"),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+      return;
+    }
 
     final novaPergunta = nomeController.text;
 
@@ -33,22 +39,57 @@ class _AdicionarHabitoState extends State<AdicionarHabito> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Adicionar Hábito'),
-        backgroundColor: Colors.teal[400],
-      ),
       backgroundColor: Colors.grey[100],
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            CampoHabito(label: "Nome do Hábito", controller: nomeController),
-            const SizedBox(height: 16),
-            CampoHabito(
-                label: "Descrição (opcional)", controller: descricaoController),
-            const SizedBox(height: 24),
-            BotaoHabito(texto: "Salvar Hábito", onPressed: salvarHabito),
-          ],
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.teal,
+        title: const Text(
+          'Novo Hábito',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Card(
+              elevation: 6,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Icon(Icons.add_task,
+                        size: 80, color: Colors.teal),
+                    const SizedBox(height: 16),
+                    const Text(
+                      "Adicionar Hábito",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    CampoHabito(
+                      label: "Nome do Hábito",
+                      controller: nomeController,
+                    ),
+                    const SizedBox(height: 32),
+                    BotaoHabito(
+                      texto: "Salvar Hábito",
+                      onPressed: salvarHabito,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
