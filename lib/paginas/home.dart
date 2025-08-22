@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: const Text("Diário de Hábitos"),
+        title: const Text("Quiz2Go"),
         centerTitle: true,
         backgroundColor: Colors.teal[400],
       ),

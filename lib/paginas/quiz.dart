@@ -51,7 +51,7 @@ class _QuizState extends State<Quiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Quiz de Hábitos"),
+        title: const Text("Quiz2Go"),
         centerTitle: true,
         backgroundColor: Colors.teal[400],
       ),
